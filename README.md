@@ -1,69 +1,69 @@
-# React + TypeScript + Vite
+# Business Buyer–Seller Platform Features
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 1. Core Platform Features
+- **Buyer–Seller Matching** (with seller-initiated contact, Bumble-style)
+- **Match Status Tracking** (pending, accepted, rejected)
+- **Integrated Messaging System** with file sharing
+- **Secure Document Exchange** (encrypted uploads/downloads)
+- **Progress Tracker** for acquisition stages
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 2. Onboarding & Profiles
 
-## Expanding the ESLint configuration
+### Buyer Onboarding
+- Goal selection (expand, diversify, invest, optimize)
+- Industry preference selection
+- Deal size range slider
+- Location preference (map or dropdown)
+- Optional AI-assisted match preferences
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Seller Onboarding
+- Reason for selling
+- Industry selection
+- Revenue range slider
+- Past buyer acquisition method
+- Optional AI-assisted match criteria
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Profile Cards
+- Quick-view cards (photo/logo, name, industry, location, deal range)
+- Accept/Reject buttons for sellers
+- Expanded profile with:
+  - Buyer’s acquisition goals
+  - Past deals
+  - References
+  - AI-generated match score
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 3. Acquisition Workflow
+- **Stage Tracker**: Pending Acceptance → Exchange Documents → Due Diligence → Negotiation → Agreement Signed
+- **AI Document Analyzer**: Summarizes financial/legal docs, highlights risks, opportunities
+- **Smart Reminders**: Nudges if deal stage is stagnant
+- **Due Diligence Checklist**: Track required docs & verifications
+- **Negotiation Aid**: AI suggests term sheet adjustments
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 4. AI-Driven Features
+- **AI Match Recommendations** (based on onboarding answers)
+- **AI Profile Summarization** (for quicker decision-making)
+- **AI Risk Insights** (during due diligence)
+- **AI Document Analyzer** (summaries + key point extraction)
+- **AI Suggested Next Steps** (based on current stage)
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
+
+## 5. Support & Utilities
+- **Settings**: Account, notifications, privacy, integrations
+- **Help Center**: Guides, FAQs, acquisition templates
+- **Resource Library**: Market reports, valuation calculators
+- **Notifications & Alerts**: Real-time updates
+
+---
+
+## 6. Design Language / UX Enhancements
+- Approachable color palette & typography
+- Friendly microcopy & tooltips
+- Clear CTAs and consistent component styling
+- Mobile & desktop responsive layouts

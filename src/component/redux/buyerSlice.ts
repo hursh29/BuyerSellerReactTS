@@ -1,10 +1,9 @@
-// buyersSlice.ts
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import type { BuyerOnboardingData } from "../../model/BuyerOnboardingData";
+import type { Buyer } from "../../model/Buyer";
 
 interface BuyersState {
-  currentBuyer: BuyerOnboardingData;
-  allOnboardedBuyers: BuyerOnboardingData[];
+  currentBuyer: Buyer;
+  allOnboardedBuyers: Buyer[];
 }
 
 const initialState: BuyersState = {
@@ -23,9 +22,9 @@ const buyersSlice = createSlice({
   name: "buyers",
   initialState,
   reducers: {
-    updateCurrentBuyerField: <K extends keyof BuyerOnboardingData>(
+    updateCurrentBuyerField: <K extends keyof Buyer>(
       state: any,
-      action: PayloadAction<{ field: K; value: BuyerOnboardingData[K] }>
+      action: PayloadAction<{ field: K; value: Buyer[K] }>
     ) => {
       state.currentBuyer[action.payload.field] = action.payload.value;
     },

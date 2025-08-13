@@ -1,5 +1,4 @@
-// types.ts
-export interface BuyerOnboardingData {
+export interface Buyer {
   name: string;
   description: string;
   goals: string[];

@@ -1,57 +1,45 @@
-import React, { useState } from "react";
+import React from "react";
 import type { Buyer } from "../../model/Buyer";
-
+import "../../style/BuyerList.css";
 
 interface BuyerCardProps {
+  idx: number
   buyer: Buyer;
-  onAccept: () => void;
-  onReject: () => void;
-  onViewProfile?: () => void;
 }
 
 const BuyerCard: React.FC<BuyerCardProps> = ({
   buyer,
-  onAccept,
-  onReject,
-  onViewProfile,
+  idx
 }) => {
-  const [showDetails, setShowDetails] = useState(false);
-
   return (
-    <div className="card">
-      <h3>{buyer.name}</h3>
-      <p>{buyer.description}</p>
-      <p>
-        <strong>Industry:</strong> {buyer.industries}
-      </p>
-      <p>
-        <strong>Location:</strong> {buyer.location}
-      </p>
-      <p>
-        <strong>Deal Size:</strong> ${buyer.dealSize}
-      </p>
-
-      {showDetails && (
-        <div className="details">
-          <h4>Goals</h4>
-          <ul>
-            {buyer.goals.map((goal, idx) => (
-              <li key={idx}>{goal}</li>
-            ))}
-          </ul>
+    <div key={idx} className="buyer-card">
+      <div className="buyer-header">
+        <div className="buyer-avatar">{buyer.name?.charAt(0) || "B"}</div>
+        <div>
+          <h3 className="buyer-name">{buyer.name}</h3>
+          <p className="buyer-detail">
+            <strong>Location:</strong> {buyer.location}
+          </p>
         </div>
-      )}
+      </div>
 
-      <div className="actions">
-        <button onClick={() => setShowDetails(!showDetails)}>
-          {showDetails ? "Hide Details" : "View Details"}
-        </button>
-        <button className="accept" onClick={onAccept}>
-          ✅ Accept
-        </button>
-        <button className="reject" onClick={onReject}>
-          ❌ Reject
-        </button>
+      <p className="buyer-detail">{buyer.description}</p>
+      <p className="buyer-detail">
+        <strong>Goals:</strong> {buyer.goals.join(", ")}
+      </p>
+      <p className="buyer-detail">
+        <strong>Industries:</strong> {buyer.industries.join(", ")}
+      </p>
+      <p className="buyer-detail">
+        <strong>Deal Size:</strong> ${buyer.dealSize.toLocaleString()}
+      </p>
+
+      <div className="buyer-tags">
+        {buyer.goals.map((goal, i) => (
+          <span key={i} className="tag">
+            {goal}
+          </span>
+        ))}
       </div>
     </div>
   );

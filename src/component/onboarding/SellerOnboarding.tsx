@@ -8,6 +8,7 @@ import {
 } from "../redux/sellerSlice";
 import RangeSlider from "../common/RangeSlider";
 import TextArea from "../common/TextArea";
+import LocationSelector from "../common/LocationSelector";
 
 const SellerOnboarding: React.FC = () => {
   const dispatch = useDispatch();
@@ -26,7 +27,7 @@ const SellerOnboarding: React.FC = () => {
   };
 
   return (
-    <div style={{ maxWidth: "600px", margin: "auto", padding: "1rem" }}>
+    <div style={{ maxWidth: "600px", margin: "auto", padding: "1rem", fontFamily:'Inter, sans-serif' }}>
       <h2>Seller Onboarding</h2>
 
       {/* Business Name */}
@@ -36,8 +37,8 @@ const SellerOnboarding: React.FC = () => {
         </label>
         <input
           type="text"
-          value={seller.businessName}
-          onChange={(e) => handleChange("businessName", e.target.value)}
+          value={seller.name}
+          onChange={(e) => handleChange("name", e.target.value)}
           style={{ width: "100%", padding: "8px" }}
         />
       </div>
@@ -89,9 +90,16 @@ const SellerOnboarding: React.FC = () => {
         max={10000000}
         step={10000}
         value={seller.expectedDealSize}
-        onChange={(dealSize) => handleChange("expectedDealSize", dealSize)}
+        onChange={(dealSize) => {
+          return handleChange("expectedDealSize", dealSize);
+        }}
         isRange
         unit="$"
+      />
+
+      <LocationSelector
+        value={seller.location}
+        onChange={(location) => handleChange("location", location)}
       />
 
       {/* Submit */}

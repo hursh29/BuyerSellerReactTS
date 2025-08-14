@@ -25,11 +25,13 @@ const Navbar: React.FC = () => {
           { path: "/buyer-onboarding", label: "Onboarding" },
           { path: "/sellers", label: "Seller List" },
           { path: "/feed", label: "Feed" },
+          { path: "/all-matches", label: "All Matches"}
         ]
       : [
           { path: "/seller-onboarding", label: "Onboarding" },
           { path: "/buyers", label: "Buyer List" },
           { path: "/feed", label: "Feed" },
+          { path: "/all-matches", label: "All Matches"}
         ];
 
   const linkClass = (path: string) =>

@@ -33,6 +33,7 @@ const matchSlice = createSlice({
       if (!state.swipesByUser[currentUserId]) {
         state.swipesByUser[currentUserId] = [];
       }
+      console.log("came here", currentUserId, targetId, direction);
       // Prevent duplicate swipes for same target
       const alreadySwiped = state.swipesByUser[currentUserId].some(
         s => s.targetId === targetId

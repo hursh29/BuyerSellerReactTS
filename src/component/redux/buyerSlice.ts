@@ -1,5 +1,6 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { Buyer } from "../../model/Buyer";
+import { generateRandomInteger } from "../constants/constants";
 
 interface BuyersState {
   currentBuyer: Buyer;
@@ -30,6 +31,7 @@ const buyersSlice = createSlice({
       state.currentBuyer[action.payload.field] = action.payload.value;
     },
     completeOnboarding: (state) => {
+      state.currentBuyer.id = generateRandomInteger(1, 10000000);
       state.allOnboardedBuyers.push({ ...state.currentBuyer });
       state.currentBuyer = initialState.currentBuyer; // reset form
     },

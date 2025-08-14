@@ -1,68 +1,82 @@
-import React from "react";
+import * as React from "react";
+import Box from "@mui/material/Box";
+import Slider from "@mui/material/Slider";
+import Typography from "@mui/material/Typography";
 
 interface RangeSliderProps {
   label: string;
   min: number;
   max: number;
   step?: number;
-  value: [number, number];
-  onChange: (value: [number, number]) => void;
-  isRange?: boolean; // true for [min, max] range
-  unit?: string; // optional display unit like "$", "%"
+  value: number[];
+  unit?: string;
+  onChange: (value: number[]) => void;
 }
 
-const RangeSlider: React.FC<RangeSliderProps> = ({
+export default function RangeSlider({
   label,
   min,
   max,
   step = 1,
   value,
-  onChange,
-  isRange = false,
   unit = "",
-}) => {
-
-  const handleChangeRange = (index: 0 | 1, val: number) => {
-    if (Array.isArray(value)) {
-      const newVal: [number, number] = [...value] as [number, number];
-      newVal[index] = val;
-      onChange(newVal);
+  onChange,
+}: RangeSliderProps) {
+  const handleChange = (event: Event, newValue: number | number[]) => {
+    if (Array.isArray(newValue)) {
+      onChange(newValue);
     }
   };
 
   return (
-    <div style={{ marginBottom: "1rem" }}>
-      <label
-        style={{ fontWeight: "bold", display: "block", marginBottom: "0.5rem" }}
-      >
-        {label}:{" "}
-        {isRange && Array.isArray(value)
-          ? `${value[0]}${unit} - ${value[1]}${unit}`
-          : `${value}${unit}`}
-      </label>
-
-      {
-        <div style={{ display: "flex", gap: "1rem" }}>
-          <input
-            type="range"
-            min={min}
-            max={max}
-            step={step}
-            value={value[0]}
-            onChange={(e) => handleChangeRange(0, Number(e.target.value))}
-          />
-          <input
-            type="range"
-            min={min}
-            max={max}
-            step={step}
-            value={value[1]}
-            onChange={(e) => handleChangeRange(1, Number(e.target.value))}
-          />
-        </div>
-      }
-    </div>
+    <Box
+      sx={{
+        width: "100%",
+        maxWidth: 500,
+        p: 3,
+        backgroundColor: "#fff",
+        borderRadius: 2,
+        boxShadow: 2,
+      }}
+    >
+      <Typography variant="h6" sx={{ mb: 2, fontWeight: "bold" }}>
+        {label}:
+        <Typography
+          component="span"
+          sx={{ ml: 1, fontWeight: "normal", color: "text.secondary" }}
+        >
+          {`${value[0]}${unit} - ${value[1]}${unit}`}
+        </Typography>
+      </Typography>
+      <Slider
+        min={min}
+        max={max}
+        step={step}
+        value={value}
+        onChange={handleChange}
+        valueLabelDisplay="auto"
+        valueLabelFormat={(v) => `${v}${unit}`}
+        sx={{
+          "& .MuiSlider-thumb": {
+            height: 18,
+            width: 18,
+            backgroundColor: "#22c55e", // Green-500
+            border: "2px solid white",
+            boxShadow: "0 0 6px rgba(34, 197, 94, 0.5)",
+            "&:hover": {
+              boxShadow: "0 0 8px rgba(34, 197, 94, 0.7)",
+            },
+          },
+          "& .MuiSlider-track": {
+            background: "linear-gradient(to right, #22c55e, #4ade80)", // Green-500 → Green-400
+            height: 6,
+          },
+          "& .MuiSlider-rail": {
+            backgroundColor: "#e5e7eb",
+            height: 6,
+          },
+        }}
+      />
+    </Box>
   );
-};
-
-export default RangeSlider;
+}

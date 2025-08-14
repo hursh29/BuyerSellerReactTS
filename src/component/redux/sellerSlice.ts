@@ -1,6 +1,7 @@
 
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { Seller } from "../../model/Seller";
+import { generateRandomInteger } from "../constants/constants";
 
 interface SellerState {
   currentSeller: Seller;
@@ -10,7 +11,7 @@ interface SellerState {
 const initialState: SellerState = {
   currentSeller: {
     id: -1,
-    businessName: "",
+    name: "",
     description: "",
     reasonForSelling: "",
     industries: [],
@@ -34,6 +35,7 @@ const sellersSlice = createSlice({
       state.currentSeller[action.payload.field] = action.payload.value;
     },
     completeSellerOnboarding(state) {
+      state.currentSeller.id = generateRandomInteger(1, 10000000);
       state.allOnboardedSellers.push({ ...state.currentSeller });
       state.currentSeller = { ...initialState.currentSeller };
     },

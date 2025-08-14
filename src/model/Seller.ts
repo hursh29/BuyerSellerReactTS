@@ -1,6 +1,6 @@
 export interface Seller {
   id: number;
-  businessName: string;
+  name: string;
   description: string;
   reasonForSelling: string;
   industries: string[];

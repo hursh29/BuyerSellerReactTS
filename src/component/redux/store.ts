@@ -1,33 +1,53 @@
 // store.ts
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import storage from "redux-persist/lib/storage"; // defaults to localStorage
+import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
-
 import buyersReducer from "./buyerSlice";
 import sellersReducer from "./sellerSlice";
 import matchReducer from "./matchSlice";
 import appModeReducer from "./appModeSlice";
+import matchOutcomesReducer from "./matchOutcomeSlice";
 
-const persistConfig = {
-  key: "root",
+// Slice-specific configs
+const buyersPersistConfig = {
+  key: "buyers",
   storage,
-  whitelist: ["buyers", "sellers", "matches", "appMode"], // slices to persist
 };
 
+const sellersPersistConfig = {
+  key: "sellers",
+  storage,
+};
+
+const matchesPersistConfig = {
+  key: "matches",
+  storage,
+};
+
+const appModePersistConfig = {
+  key: "appMode",
+  storage,
+};
+
+const matchOutcomesPersistConfig = {
+  key: "matchOutcomes",
+  storage,
+}
+
+// Combine persisted slices
 const rootReducer = combineReducers({
-  buyers: buyersReducer,
-  sellers: sellersReducer,
-  matches: matchReducer,
-  appMode: appModeReducer,
+  buyers: persistReducer(buyersPersistConfig, buyersReducer),
+  sellers: persistReducer(sellersPersistConfig, sellersReducer),
+  matches: persistReducer(matchesPersistConfig, matchReducer),
+  appMode: persistReducer(appModePersistConfig, appModeReducer),
+  matchOutcomes: persistReducer(matchOutcomesPersistConfig, matchOutcomesReducer, )
 });
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
-
 export const store = configureStore({
-  reducer: persistedReducer,
+  reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      serializableCheck: false, // required for redux-persist
+      serializableCheck: false,
     }),
 });
 

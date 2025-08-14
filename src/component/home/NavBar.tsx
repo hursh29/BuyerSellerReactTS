@@ -1,40 +1,62 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import type { RootState } from "../redux/store";
+import { toggleMode } from "../redux/appModeSlice";
+import "../../style/NavBar.css"
 
 const Navbar: React.FC = () => {
   const location = useLocation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const mode = useSelector((state: RootState) => state.appMode.mode);
 
-  const linkStyle = (path: string) => ({
-    padding: "0.5rem 1rem",
-    textDecoration: "none",
-    color: location.pathname === path ? "#fff" : "#333",
-    background: location.pathname === path ? "#4CAF50" : "transparent",
-    borderRadius: "4px",
-    transition: "all 0.2s ease",
-  });
+  const handleToggleMode = () => {
+  const newMode = mode === "buyer" ? "seller" : "buyer";
+  dispatch(toggleMode());
+
+  // Wait until after dispatch for navigation (sync enough for Redux)
+  navigate(`/${newMode}-onboarding`);
+};
+
+  const navLinks =
+    mode === "buyer"
+      ? [
+          { path: "/buyer-onboarding", label: "Onboarding" },
+          { path: "/sellers", label: "Seller List" },
+          { path: "/feed", label: "Feed" },
+        ]
+      : [
+          { path: "/seller-onboarding", label: "Onboarding" },
+          { path: "/buyers", label: "Buyer List" },
+          { path: "/feed", label: "Feed" },
+        ];
+
+  const linkClass = (path: string) =>
+    `nav-link ${location.pathname === path ? "active" : ""}`;
 
   return (
-    <nav
-      style={{
-        display: "flex",
-        gap: "1rem",
-        padding: "1rem",
-        background: "#f4f4f4",
-        boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
-      }}
-    >
-      <Link to="/buyer-onboarding" style={linkStyle("/buyer-onboarding")}>
-        Buyer Onboarding
-      </Link>
-      <Link to="/seller-onboarding" style={linkStyle("/seller-onboarding")}>
-        Seller Onboarding
-      </Link>
-      <Link to="/buyers" style={linkStyle("/buyers")}>
-        Buyer List
-      </Link>
-      <Link to="/sellers" style={linkStyle("/sellers")}>
-        Seller List
-      </Link>
+    <nav className="navbar">
+      <div className="nav-left">
+        <h2 className="logo">BusinessMatch</h2>
+      </div>
+
+      <div className="nav-center">
+        {navLinks.map((link) => (
+          <Link key={link.path} to={link.path} className={linkClass(link.path)}>
+            {link.label}
+          </Link>
+        ))}
+      </div>
+
+      <div className="nav-right">
+        <span className="mode-label">
+          Mode: <strong>{mode.toUpperCase()}</strong>
+        </span>
+        <button className="mode-toggle" onClick={handleToggleMode}>
+          Switch to {mode === "buyer" ? "Seller" : "Buyer"}
+        </button>
+      </div>
     </nav>
   );
 };

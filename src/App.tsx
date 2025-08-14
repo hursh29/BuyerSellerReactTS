@@ -5,7 +5,7 @@ import BuyerOnboarding from "./component/onboarding/BuyerOnboarding";
 import SellerOnboarding from "./component/onboarding/SellerOnboarding";
 import BuyersList from "./component/listing/BuyersList";
 import SellerList from "./component/listing/SellerList";
-
+import SwipeFeed from "./component/matching/SwipeFeed";
 
 const App: React.FC = () => {
   return (
@@ -18,6 +18,7 @@ const App: React.FC = () => {
           <Route path="/seller-onboarding" element={<SellerOnboarding />} />
           <Route path="/buyers" element={<BuyersList />} />
           <Route path="/sellers" element={<SellerList />} />
+          <Route path="/feed" element={<SwipeFeed currentUserId={0} />} />
         </Routes>
       </div>
     </Router>

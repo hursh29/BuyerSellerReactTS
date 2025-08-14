@@ -8,6 +8,7 @@ interface BuyersState {
 
 const initialState: BuyersState = {
   currentBuyer: {
+    id: -1,
     name: "",
     description: "",
     goals: [],

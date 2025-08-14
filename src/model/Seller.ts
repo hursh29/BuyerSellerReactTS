@@ -1,4 +1,5 @@
 export interface Seller {
+  id: number;
   businessName: string;
   description: string;
   reasonForSelling: string;

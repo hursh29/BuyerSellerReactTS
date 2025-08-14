@@ -1,4 +1,5 @@
 export interface Buyer {
+  id: number;
   name: string;
   description: string;
   goals: string[];

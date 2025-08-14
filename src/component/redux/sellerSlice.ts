@@ -9,6 +9,7 @@ interface SellerState {
 
 const initialState: SellerState = {
   currentSeller: {
+    id: -1,
     businessName: "",
     description: "",
     reasonForSelling: "",
